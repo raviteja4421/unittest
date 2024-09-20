@@ -1,6 +1,6 @@
-name: Run Unit Test via unittest
+name: Python application
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   build:
@@ -24,10 +24,9 @@ jobs:
           pip install ruff
           ruff --format=github --target-version=py310 .
         continue-on-error: true
-      - name: Test with unittest
+
+      - name: Run tests
         run: |
-          coverage run -m unittest  -v -s
-      - name: Generate Coverage Report
-        run: |
-          coverage report -m
+          python -m unittest discover
+     
       
